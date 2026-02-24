@@ -11,12 +11,13 @@ import characterRoutes from './routes/characters.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.INTERNAL_PORT || 3000;
+const HOST = '0.0.0.0';
 
 // Middleware
-app.use(cors()); // Enable CORS for frontend
-app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -36,8 +37,8 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Root endpoint
-app.get('/', (req, res) => {
+// API Root response
+const rootHandler = (req, res) => {
     res.json({
         message: 'TTRPG Character Leveler API',
         version: '1.0.0',
@@ -46,7 +47,10 @@ app.get('/', (req, res) => {
             characters: '/api/characters'
         }
     });
-});
+};
+
+app.get('/api', rootHandler);
+app.get('/', rootHandler);
 
 // 404 handler
 app.use((req, res) => {
@@ -67,18 +71,23 @@ app.use((err, req, res, next) => {
 
 // Start server
 async function startServer() {
-    // Test database connection first
     const dbConnected = await testConnection();
 
     if (!dbConnected) {
-        console.error('⚠️  Server starting without database connection');
+        console.error('Server starting without database connection');
         console.error('Please check your database configuration in .env file');
+    } else {
+        console.log('Database connection successful');
+        const db = await import('./models/index.js');
+        await db.default.sequelize.sync({ alter: true });
+        console.log('Database synchronized');
     }
 
-    app.listen(PORT, () => {
-        console.log(`\n🚀 Server running on http://localhost:${PORT}`);
-        console.log(`📊 API endpoints available at http://localhost:${PORT}/api`);
-        console.log(`\nPress Ctrl+C to stop the server\n`);
+    app.listen(PORT, HOST, () => {
+        console.log(`Server running!`);
+        console.log(`Local:   http://localhost:${PORT}`);
+        console.log(`Docker:  http://localhost:80 (via Nginx)`);
+        console.log(`API:     http://localhost:${PORT}/api`);
     });
 }
 
