@@ -34,6 +34,19 @@ class CharacterController {
     }
 
     /**
+     * Update a character's stats by ID
+     */
+    async updateCharacter(id, statsData) {
+        try {
+            const data = await apiService.put(API_ENDPOINTS.characters.byId(id), statsData);
+            return new Character(data);
+        } catch (error) {
+            console.error(`Failed to update character ${id}:`, error);
+            throw error;
+        }
+    }
+
+    /**
      * Get all characters (when we have more characters)
      */
     async getAllCharacters() {

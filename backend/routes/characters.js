@@ -92,4 +92,32 @@ router.post('/create', authenticate, async (req, res) => {
     }
 });
 
+/**
+ * PUT /api/characters/:id
+ * Update an existing character's stats
+ */
+router.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const existing = await charRepo.findCharacterById(id);
+        if (!existing) {
+            return res.status(404).json({
+                error: 'Character not found',
+                message: `Character with ID ${id} not found`
+            });
+        }
+
+        await charRepo.updateCharacter(id, req.body);
+        const updated = await charRepo.findCharacterById(id);
+        res.json(updated);
+    } catch (error) {
+        console.error('Error updating character:', error);
+        res.status(500).json({
+            error: 'Internal server error',
+            message: error.message
+        });
+    }
+});
+
 export default router;
