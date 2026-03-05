@@ -1,0 +1,117 @@
+/* ── Stat Adjuster (up/down arrows) ── */
+
+.stat-adjuster {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.stat-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #2a2a2a;
+    color: #ddd;
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.stat-arrow:hover:not(:disabled) {
+    background: #444;
+    border-color: #888;
+}
+
+.stat-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.stat-value {
+    min-width: 28px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Adjuster inside ability cards */
+.ability-card .stat-adjuster {
+    margin-left: 0;
+    margin-top: 6px;
+    justify-content: center;
+}
+
+/* ── Footer buttons ── */
+
+.edit-button,
+.save-button,
+.cancel-button {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
+}
+
+.edit-button {
+    background: #3b82f6;
+    color: #fff;
+}
+
+.edit-button:hover {
+    background: #2563eb;
+}
+
+.save-button {
+    background: #22c55e;
+    color: #fff;
+}
+
+.save-button:hover:not(:disabled) {
+    background: #16a34a;
+}
+
+.save-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.cancel-button {
+    background: #6b7280;
+    color: #fff;
+    margin-left: 8px;
+}
+
+.cancel-button:hover:not(:disabled) {
+    background: #4b5563;
+}
+
+.cancel-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ── Save error banner ── */
+
+.save-error {
+    background: #451a1a;
+    border: 1px solid #dc2626;
+    color: #fca5a5;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+}
+
+.save-error-icon {
+    margin-right: 6px;
+}
