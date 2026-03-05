@@ -55,9 +55,6 @@ describe("User Controllers Test Suite", () => {
     jest.clearAllMocks();
   });
 
-  // ==========================================
-  // GET ALL USERS
-  // ==========================================
   describe("GET /api/users (getUsersController)", () => {
     it("should return a 200 status and a list of sanitized users (no passwords)", async () => {
       const mockUsersFromDb = [
@@ -103,9 +100,6 @@ describe("User Controllers Test Suite", () => {
     });
   });
 
-  // ==========================================
-  // GET USER BY ID
-  // ==========================================
   describe("GET /api/users/:id (getUser)", () => {
     it("should return 200 and a sanitized user for a valid ID", async () => {
       getUserById.mockResolvedValue(mockDbUser);
@@ -127,9 +121,6 @@ describe("User Controllers Test Suite", () => {
     });
   });
 
-  // ==========================================
-  // CREATE USER
-  // ==========================================
   describe("POST /api/users (createNewUser)", () => {
     it("should return 201 and create a user when given a valid payload", async () => {
       createUser.mockResolvedValue(mockDbUser);
@@ -163,9 +154,6 @@ describe("User Controllers Test Suite", () => {
     });
   });
 
-  // ==========================================
-  // UPDATE USER
-  // ==========================================
   describe("PUT /api/users/:id (updateExistingUser)", () => {
     it("should return 200 and the updated sanitized user on success", async () => {
       updateUser.mockResolvedValue([1]);
@@ -198,9 +186,6 @@ describe("User Controllers Test Suite", () => {
     });
   });
 
-  // ==========================================
-  // DELETE USER
-  // ==========================================
   describe("DELETE /api/users/:id (deleteExistingUser)", () => {
     it("should return 200 and a success message if deleted successfully", async () => {
       deleteUser.mockResolvedValue(true);
