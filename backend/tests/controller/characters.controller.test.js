@@ -54,9 +54,6 @@ describe("Character Controllers Test Suite", () => {
     jest.clearAllMocks();
   });
 
-  // ==========================================
-  // CREATE CHARACTER
-  // ==========================================
   describe("POST /api/characters (createCharacterController)", () => {
     it("should return 201 and create a character with valid data", async () => {
       createCharacter.mockResolvedValue(mockCharacter);
@@ -103,9 +100,6 @@ describe("Character Controllers Test Suite", () => {
     });
   });
 
-  // ==========================================
-  // GET CHARACTER BY ID
-  // ==========================================
   describe("GET /api/characters/:charId (getCharacterByCharacterId)", () => {
     it("should return 200 and the character if found", async () => {
       findCharacterById.mockResolvedValue(mockCharacter);
@@ -126,9 +120,6 @@ describe("Character Controllers Test Suite", () => {
     });
   });
 
-  // ==========================================
-  // GET CHARACTERS BY USER ID
-  // ==========================================
   describe("GET /api/users/:userId/characters (getAllCharactersByUserId)", () => {
     it("should return 200 and an array of characters for a valid user ID", async () => {
       findAllCharactersByUserId.mockResolvedValue([mockCharacter]);
@@ -150,9 +141,6 @@ describe("Character Controllers Test Suite", () => {
     });
   });
 
-  // ==========================================
-  // UPDATE CHARACTER
-  // ==========================================
   describe("PUT /api/characters/:id (updateCharacterController)", () => {
     it("should return 200 and the updated character on success", async () => {
       // Mock update to succeed (return value doesn't matter much since controller ignores it)
@@ -182,9 +170,6 @@ describe("Character Controllers Test Suite", () => {
     });
   });
 
-  // ==========================================
-  // DELETE CHARACTER
-  // ==========================================
   describe("DELETE /api/characters/:id (deleteCharacterController)", () => {
     it("should return 204 when a character is deleted successfully", async () => {
       deleteCharacter.mockResolvedValue();
