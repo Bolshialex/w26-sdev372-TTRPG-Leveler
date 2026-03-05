@@ -20,7 +20,7 @@ import {
 
 // 2. Import your database connection / ORM instance
 // NOTE: Adjust this path to wherever your Sequelize/DB connection is initialized
-import { sequelize } from "../../config/database.js";
+import sequelize from "../../config/sequelize.js";
 
 // 3. Set up the Express app with the real routes
 const app = express();
