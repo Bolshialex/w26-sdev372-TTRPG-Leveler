@@ -131,6 +131,22 @@ class ApiService {
         }
     }
 
+    async put(endpoint, body, options = {}) {
+        try {
+            const url = `${this.baseURL}${endpoint}`;
+            const response = await this.fetchWithTimeout(url, {
+                method: 'PUT',
+                headers: this.getHeaders(options.headers),
+                body: JSON.stringify(body),
+                ...options
+            });
+            return await this.handleResponse(response);
+        } catch (error) {
+            console.error('PUT request failed:', error);
+            throw error;
+        }
+    }
+
 }
 
 // Export singleton instance
